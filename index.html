@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="css/styles.css" />
+    </head>
+    <body>
+        <div class="nav-bar"></div>
+        <div id="app">
+            <div class="product">
+                <div class="product-image">
+                    <img :src="image" :alt="alt">
+                </div>
+                <div class="product-info">
+                    <h1>{{product}}</h1>
+                    <p v-if="inventory > 10">In Stock</p>
+                    <p v-else-if="inventory <= 10 && inventory > 0">Almost sold out</p>
+                    <p v-else>Out of Stock</p>
+                    <ul>
+                        <li v-for="detail in details">{{detail}}</li>
+                    </ul>
+                    <div v-for="variant in variants" 
+                            :key="variant.variantId"
+                            class="color-box"
+                           
+                            @mouseover="updateProduct(variant.variantImage)" >
+                    </div>
+                    <button v-on:click="addToCart" :disabled="!inStock" :class="{ disabledButton: !inStock }">Add to Cart</button>
+                    <div class="cart">
+                        <p>Cart({{cart}})</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        <script src="https://unpkg.com/vue"></script>
+        <script src="main.js"></script>
+        
+    </body>
+</html>
